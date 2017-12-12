@@ -1,6 +1,16 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
+  <div>
+    <ul class="nav">
+      <li class="nav-item">
+        <router-link class="nav-link" to="/">Início</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link class="nav-link" to="/ClienteHome">Clientes</router-link>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Financeiro</a>
+      </li>
+    </ul>
     <router-view/>
   </div>
 </template>
@@ -12,12 +22,9 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  .nav{
+    display: flex;
+    flex-direction: row;
+  }
+
 </style>
