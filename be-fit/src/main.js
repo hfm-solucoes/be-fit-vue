@@ -13,6 +13,7 @@ let Bootstrap = require('bootstrap')
 Vue.use(VueResource)
 Vue.use(Bootstrap)
 Vue.config.productionTip = false
+Vue.http.options.root = 'http://localhost:3000'
 
 /* eslint-disable no-new */
 new Vue({

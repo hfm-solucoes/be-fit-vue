@@ -22,6 +22,11 @@ export default new Router({
       path: '/ClienteCadastro',
       name: 'ClienteCadastro',
       component: ClienteCadastro
+    },
+    {
+      path: '/ClienteCadastro/:id',
+      name: 'ClienteAlterar',
+      component: ClienteCadastro
     }
   ]
 })
