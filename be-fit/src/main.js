@@ -4,14 +4,12 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 import App from './App'
 import router from './router'
-import jQuery from 'jquery'
+import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
-import 'font-awesome/css/font-awesome.css'
-global.jQuery = jQuery
-let Bootstrap = require('bootstrap')
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(VueResource)
-Vue.use(Bootstrap)
+Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 Vue.http.options.root = 'http://localhost:3000'
 

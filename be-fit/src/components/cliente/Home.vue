@@ -1,38 +1,16 @@
 <template>
     <div>
-        <h2>Clientes 
-            <small>
-                <router-link class="nav-link" to="/ClienteCadastro">Adicionar Cliente</router-link>
-            </small>
-        </h2>
         <div class="container">
-            <table class="table">
-                <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Sexo</th>
-                    <th scope="col">Nascimento</th>
-                    <th scope="col">Contato</th>
-                    <th scope="col">Açoes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="cliente of clientes">
-                        <th scope="row">{{cliente.id}}</th>
-                        <td>{{cliente.nome}}</td>
-                        <td>{{cliente.sexo}}</td>
-                        <td>{{cliente.dtNasc}}</td>
-                        <td>{{cliente.telefone}}</td>
-                        <td>
-                            <router-link class="nav-link" to="/">Visualizar</router-link> /
-                            <router-link class="nav-link" :to="{name: 'ClienteAlterar', params: {id: cliente.idUsuario}}">Alterar</router-link> /
-                            <router-link class="nav-link" to="/">Excluir</router-link>
-                        </td>
-                    </tr>
-
-                </tbody>
-                </table>
+            <div class="header">
+                <h2>Clientes</h2>
+                <p><router-link class="nav-link" to="/ClienteCadastro">Adicionar Cliente</router-link></p>
+            </div>
+           <b-table striped hover :items="clientes" :fields="fields">
+                <template slot="acoes" scope="data">
+                    <router-link class="nav-link" :to="{name: 'ClienteAlterar', params: {id: data.idUsuario}}">Alterar</router-link>
+                
+                </template>
+           </b-table>
         </div>
     </div>
   
@@ -45,6 +23,31 @@
         data () {
             return{
                 clientes: [],
+                fields: {
+                    idUsuario: {
+                        label: 'Id',
+                        sortable: true
+                    },
+                    nome: {
+                        label: 'Nome',
+                        sortable: true
+                    },
+                    sexo: {
+                        label: 'Sexo',
+                        sortable: true
+                    },
+                    dtNasc: {
+                        label: 'Data de Nascimento',
+                        sortable: true
+                    },
+                    telefone:{
+                        label: 'Contato',
+                        sortable: true
+                    },
+                    acoes:{
+                        label: 'Ações'
+                    }
+                },
             }
         },
 
@@ -52,7 +55,16 @@
             this.service = new ClienteService(this.$resource);
             this.service
                 .lista()
-                .then(clientes => this.clientes = clientes, err => this.mensagem.erro = err.message);
+                .then(clientes => {
+                    this.clientes = clientes.map(({idUsuario, nome, sexo, dtNasc, telefone}) => ({idUsuario, nome, sexo, dtNasc, telefone}))
+                }, err => this.mensagem.erro = err.message);
         }
     }
 </script>
+
+<style>
+    .header{
+        display: flex;
+        flex-direction: row;
+    }
+</style>
