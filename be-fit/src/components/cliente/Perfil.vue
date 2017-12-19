@@ -1,13 +1,13 @@
 <template>
   <div class="container">
     <div class="header">
-        <h2>Cadastro de Cliente</h2>
+        <h2>Perfil de Cliente</h2>
         <p><router-link class="nav-link" to="/ClienteHome">Voltar</router-link></p>
     </div>
     <form  @submit.prevent="gravar()">
 
         <b-tabs>
-            <b-tab title="Básico" active>
+            <b-tab title="Funcionais">
                 <div class="row">
                     <div class="col form-group">
                         <label for="nome">Nome</label>

@@ -3,12 +3,12 @@
         <div class="container">
             <div class="header">
                 <h2>Clientes</h2>
-                <p><router-link class="nav-link" to="/ClienteCadastro">Adicionar Cliente</router-link></p>
+                <p><router-link class="nav-link" :to="{name: 'ClientePerfil'}">Adicionar Cliente</router-link></p>
             </div>
            <b-table striped hover :items="clientes" :fields="fields">
                 <template slot="acoes" scope="data">
                     <router-link class="nav-link" :to="{name: 'ClienteAlterar', params: {id: data.idUsuario}}">Alterar</router-link>
-                
+                    <router-link class="nav-link" :to="{name: 'ClienteMedidas', params: {id: data.idUsuario}}">Medidas</router-link>                
                 </template>
            </b-table>
         </div>
