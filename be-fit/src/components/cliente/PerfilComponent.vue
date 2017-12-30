@@ -91,7 +91,10 @@
             if(this.id){
                 this.service
                     .busca(this.id)
-                    .then(cliente => this.cliente = cliente, err => console.log(err))
+                    .then(cliente => {
+                        this.cliente = cliente
+                        this.cliente.dtNasc = this.moment(this.cliente.dtNasc).format('YYYY-MM-DD')
+                    }, err => console.log(err))
             }
         },
 

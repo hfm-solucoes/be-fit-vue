@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
-import ClienteHome from '@/components/cliente/Home'
-import ClientePerfil from '@/components/cliente/Perfil'
-import ClienteMedidas from '@/components/cliente/Medidas'
+import ClienteHome from '@/components/cliente/HomeComponent'
+import ClientePerfil from '@/components/cliente/PerfilComponent'
+import ClienteMedidas from '@/components/medidas/MedidasComponent'
 
 Vue.use(Router)
 

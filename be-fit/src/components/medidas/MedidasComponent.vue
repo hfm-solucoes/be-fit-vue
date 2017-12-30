@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="header">
-            <h2>Nome - Medidas</h2>
+            <h2>{{this.nome}} - Medidas</h2>
             <p><router-link class="nav-link" to="/ClienteHome">Voltar</router-link></p>
         </div>
         <form  @submit.prevent="gravar()">
@@ -277,10 +277,25 @@
 </template>
 
 <script>
+    import Medidas from './Medidas.js'
+    import MedidasService from './MedidasService.js'
     export default{
+        created () {
+            this.serviceMedida = new MedidasService(this.$resource);
+            if(this.id){
+                this.serviceMedida
+                    .busca(this.id)
+                    .then(medida => {
+                        this.medida = medida
+                        console.log(this.medida)
+                    }, err => console.log(err))
+            }
+        },
         data () {
             return{
-                medida: {},
+                id: this.$route.params.id,
+                nome: this.$route.params.nome,
+                medida: new Medidas(),
                 medidas: [],
                 fields: {
                     idMedida: {
@@ -309,6 +324,19 @@
                 },
             }
         },
+        methods: {
+            gravar () {
+                this.medida.idUsuario = this.id;
+                this.serviceMedida
+                    .cadastra(this.medida)
+                    .then(res => {
+                    alert("Medida cadastrada com sucesso")
+                    this.medida = new Medidas()
+                    this.$router.push({name: 'ClienteHome'})
+                    }, err => alert(err))
+            }
+        }
+
     }
 </script>
 

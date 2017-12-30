@@ -31,4 +31,12 @@ export default class ClienteService {
         throw new Error('Não foi possivel buscar o cliente')
       })
   }
+
+  apaga (id) {
+    return this._resource.delete({ id })
+      .then(null, err => {
+        console.log(err)
+        throw new Error('Não foi possivel excluir o cliente')
+      })
+  }
 }

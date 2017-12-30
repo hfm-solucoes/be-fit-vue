@@ -7,8 +7,11 @@
             </div>
            <b-table striped hover :items="clientes" :fields="fields">
                 <template slot="acoes" scope="data">
-                    <router-link class="nav-link" :to="{name: 'ClienteAlterar', params: {id: data.idUsuario}}">Alterar</router-link>
-                    <router-link class="nav-link" :to="{name: 'ClienteMedidas', params: {id: data.idUsuario}}">Medidas</router-link>                
+                    <div class="row">
+                        <router-link class="nav-link" :to="{name: 'ClienteAlterar', params: {id: data.item.idUsuario}}">Alt</router-link>
+                        <router-link class="nav-link" :to="{name: 'ClienteMedidas', params: {id: data.item.idUsuario, nome: data.item.nome}}">Med</router-link>    
+                        <button @click="apaga(data.item)">del</button>           
+                    </div>
                 </template>
            </b-table>
         </div>
@@ -57,7 +60,22 @@
                 .lista()
                 .then(clientes => {
                     this.clientes = clientes.map(({idUsuario, nome, sexo, dtNasc, telefone}) => ({idUsuario, nome, sexo, dtNasc, telefone}))
-                }, err => this.mensagem.erro = err.message);
+                }, err => alert(err));
+        },
+
+        methods: {
+            apaga(cliente){
+                this.service
+                    .apaga(cliente)
+                    .then(res => {
+                        alert("O cliente foi apagado com sucesso");
+                        let indice = this.clientes.indexOf(cliente);
+                        this.clientes.splice(indice, 1);
+                    }, err => {
+                        console.log(err)
+                        alert("Não foi possivel apagar o cliente");
+                    })
+            }
         }
     }
 </script>
