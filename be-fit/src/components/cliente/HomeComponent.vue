@@ -3,17 +3,29 @@
         <div class="container">
             <div class="header">
                 <h2>Clientes</h2>
-                <p><router-link class="nav-link" :to="{name: 'ClientePerfil'}">Adicionar Cliente</router-link></p>
+                <p><router-link class="nav-link" :to="{name: 'ClientePerfil'}">Adicionar novo cliente</router-link></p>
             </div>
-           <b-table striped hover :items="clientes" :fields="fields">
-                <template slot="acoes" scope="data">
-                    <div class="row">
-                        <router-link class="nav-link" :to="{name: 'ClienteAlterar', params: {id: data.item.idUsuario}}">Alt</router-link>
-                        <router-link class="nav-link" :to="{name: 'ClienteMedidas', params: {id: data.item.idUsuario, nome: data.item.nome}}">Med</router-link>    
-                        <button @click="apaga(data.item)">del</button>           
-                    </div>
-                </template>
-           </b-table>
+            <b-row>
+                <b-col md="6" class="my-1">
+                    <b-form-group horizontal label="Filtro" class="mb-0">
+                        <b-input-group>
+                            <b-form-input v-model="filter" placeholder="Type to Search" />
+                            <b-input-group-button>
+                            <b-btn :disabled="!filter" @click="filter = ''">Clear</b-btn>
+                            </b-input-group-button>
+                        </b-input-group>
+                    </b-form-group>
+                </b-col>
+            </b-row>
+            <b-table striped hover :items="clientes" :fields="fields"  :filter="filter" @filtered="onFiltered">
+                    <template slot="acoes" scope="data">
+                        <div class="row">
+                            <router-link class="nav-link" :to="{name: 'ClienteAlterar', params: {id: data.item.idUsuario}}">Alt</router-link>
+                            <router-link class="nav-link" :to="{name: 'ClienteMedidas', params: {id: data.item.idUsuario, nome: data.item.nome}}">Med</router-link>    
+                            <button @click="apaga(data.item)">del</button>           
+                        </div>
+                    </template>
+            </b-table>
         </div>
     </div>
   
@@ -25,6 +37,7 @@
     export default{
         data () {
             return{
+                filter: null,
                 clientes: [],
                 fields: {
                     idUsuario: {
@@ -48,7 +61,8 @@
                         sortable: true
                     },
                     acoes:{
-                        label: 'Ações'
+                        label: 'Ações',
+                        sortable: false
                     }
                 },
             }

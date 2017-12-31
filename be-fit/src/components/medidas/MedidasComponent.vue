@@ -270,8 +270,8 @@
             <button type="submit" class="btn btn-primary">Incluir</button>
         </form>
 
-        <b-table striped hover :items="medidas" :fields="fields">
-        </b-table>
+       <!-- <b-table striped hover :items="medidas" :fields="fields">
+        </b-table> -->
 
     </div>
 </template>
@@ -287,7 +287,6 @@
                     .busca(this.id)
                     .then(medida => {
                         this.medida = medida
-                        console.log(this.medida)
                     }, err => console.log(err))
             }
         },
