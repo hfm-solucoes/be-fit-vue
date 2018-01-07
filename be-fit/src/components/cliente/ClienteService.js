@@ -21,6 +21,7 @@ export default class ClienteService {
     return this._resource.query()
       .then(res => res.json(), err => {
         console.log(err)
+        throw new Error('Não foi possivel listar os clientes')
       })
   }
 

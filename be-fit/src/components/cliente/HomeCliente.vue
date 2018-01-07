@@ -3,7 +3,7 @@
         <div class="container">
             <div class="header">
                 <h2>Clientes</h2>
-                <p><router-link class="nav-link" :to="{name: 'ClienteLogin'}">Adicionar novo cliente</router-link></p>
+                <p><router-link class="nav-link" :to="{name: 'ClientePerfil'}">Adicionar novo cliente</router-link></p>
             </div>
             <b-row>
                 <b-col md="6" class="my-1">

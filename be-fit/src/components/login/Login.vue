@@ -60,10 +60,11 @@ export default {
         gravar () {
             if(this.senha === this.login.senha){
                 this.service
-                    .cadastrar(this.login)
+                    .cadastra(this.login)
                     .then(res => {
                         this.login = new Login()
-                        this.$router.push({name: 'ClientePerfil', params: { idLogin: res.body }})
+                        alert("Cadastro efetuado com sucesso")
+                        this.$router.push({name: 'Home'})
                     }, err => {
                         alert(err)
                     })
