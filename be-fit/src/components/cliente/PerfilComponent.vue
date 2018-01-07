@@ -39,6 +39,12 @@
                         <input type="text" class="form-control" id="telefone" v-model="cliente.telefone">
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col form-group">
+                        <label for="idLogin">ID Login</label>
+                        <input type="text" class="form-control" id="idLogin" v-model="idLogin ? idLogin : cliente.idLogin" disabled>
+                    </div>
+                </div>
                 
             </b-tab>
             <b-tab title="Endereço" >
@@ -102,11 +108,13 @@
             return{
                 cliente: new Cliente(),
                 id: this.$route.params.id,
+                idLogin: this.$route.params.idLogin
             }
         },
 
         methods: {
             gravar () {
+                this.cliente.idLogin = this.idLogin;
                 this.service
                     .cadastra(this.cliente)
                     .then(res => {

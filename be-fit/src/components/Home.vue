@@ -11,7 +11,8 @@
         </b-form-group>
 
         <b-button type="submit">Entrar</b-button>
-        <b-button href="#">Cadastrar</b-button>
+        
+        <router-link to="ClienteLogin"><b-button>Cadastrar</b-button></router-link>
       </b-form>
     </div>
   </div>

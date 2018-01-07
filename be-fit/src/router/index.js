@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import ClienteHome from '@/components/cliente/HomeComponent'
+import ClienteLogin from '@/components/cliente/LoginComponent'
 import ClientePerfil from '@/components/cliente/PerfilComponent'
 import ClienteMedidas from '@/components/medidas/MedidasComponent'
 
@@ -18,6 +19,11 @@ export default new Router({
       path: '/ClienteHome',
       name: 'ClienteHome',
       component: ClienteHome
+    },
+    {
+      path: '/ClienteLogin',
+      name: 'ClienteLogin',
+      component: ClienteLogin
     },
     {
       path: '/ClientePerfil',

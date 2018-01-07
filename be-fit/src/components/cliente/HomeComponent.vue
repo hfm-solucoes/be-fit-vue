@@ -3,7 +3,7 @@
         <div class="container">
             <div class="header">
                 <h2>Clientes</h2>
-                <p><router-link class="nav-link" :to="{name: 'ClientePerfil'}">Adicionar novo cliente</router-link></p>
+                <p><router-link class="nav-link" :to="{name: 'ClienteLogin'}">Adicionar novo cliente</router-link></p>
             </div>
             <b-row>
                 <b-col md="6" class="my-1">
@@ -17,7 +17,7 @@
                     </b-form-group>
                 </b-col>
             </b-row>
-            <b-table striped hover :items="clientes" :fields="fields"  :filter="filter" @filtered="onFiltered">
+            <b-table striped hover :items="clientes" :fields="fields"  :filter="filter">
                     <template slot="acoes" scope="data">
                         <div class="row">
                             <router-link class="nav-link" :to="{name: 'ClienteAlterar', params: {id: data.item.idUsuario}}">Alt</router-link>

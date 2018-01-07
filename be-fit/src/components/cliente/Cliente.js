@@ -1,5 +1,5 @@
 export default class Cliente {
-  constructor (nome, dtNasc, cpf, rg, sexo, endereco, numero, bairro, cidade, uf, cep, telefone) {
+  constructor (nome, dtNasc, cpf, rg, sexo, endereco, numero, bairro, cidade, uf, cep, telefone, idLogin) {
     this.nome = nome
     this.dtNasc = dtNasc
     this.cpf = cpf
@@ -11,5 +11,6 @@ export default class Cliente {
     this.uf = uf
     this.cep = cep
     this.telefone = telefone
+    this.idLogin = idLogin
   }
 }
