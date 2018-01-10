@@ -87,6 +87,9 @@
     
     export default{
         created () {
+            if(!this.$store.state.auth){
+                this.$router.push({name: 'Home'})
+            }
             this.service = new ClienteService(this.$resource);
             if(this.id){
                 this.service

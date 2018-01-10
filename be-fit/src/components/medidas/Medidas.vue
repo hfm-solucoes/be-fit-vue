@@ -281,6 +281,9 @@
     import MedidasService from './MedidasService.js'
     export default{
         created () {
+            if(!this.$store.state.auth){
+                this.$router.push({name: 'Home'})
+            }
             this.serviceMedida = new MedidasService(this.$resource);
             if(this.id){
                 this.serviceMedida

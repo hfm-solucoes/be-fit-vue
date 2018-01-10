@@ -1,6 +1,9 @@
 export default class LoginService {
   constructor (resource) {
-    this._resource = resource('v1/login{/id}')
+    var customActions = {
+      autentica: {method: 'POST', url: 'v1/autentica'}
+    }
+    this._resource = resource('v1/login{/id}', {}, customActions)
   }
 
   cadastra (login) {
@@ -17,11 +20,11 @@ export default class LoginService {
     }
   }
 
-  lista () {
-    return this._resource.query()
+  autentica (login) {
+    return this._resource.autentica(login)
       .then(res => res.json(), err => {
         console.log(err)
-        throw new Error('Não foi possivel listar o login')
+        throw new Error('Não foi possivel autenticar')
       })
   }
 }

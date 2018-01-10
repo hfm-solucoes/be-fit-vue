@@ -8,6 +8,7 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import moment from 'moment'
+import {store} from '../store/store.js'
 
 Vue.prototype.moment = moment
 
@@ -18,6 +19,7 @@ Vue.http.options.root = 'http://localhost:3000'
 
 /* eslint-disable no-new */
 new Vue({
+  store: store,
   el: '#app',
   router,
   template: '<App/>',

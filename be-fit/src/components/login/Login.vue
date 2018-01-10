@@ -45,6 +45,9 @@ import Login from './Login.js'
 import LoginService from './LoginService.js'
 export default {
     created(){
+        if(!this.$store.state.auth){
+                this.$router.push({name: 'Home'})
+            }
         this.service = new LoginService(this.$resource);
     },
 

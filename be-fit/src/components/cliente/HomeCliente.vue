@@ -69,6 +69,9 @@
         },
 
         created(){
+            if(!this.$store.state.auth){
+                this.$router.push({name: 'Home'})
+            }
             this.service = new ClienteService(this.$resource);
             this.service
                 .lista()
