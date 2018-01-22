@@ -20,9 +20,33 @@ export default class LoginService {
     }
   }
 
+  lista () {
+    return this._resource.query()
+      .then(res => res.json(), err => {
+        console.log(err)
+        throw new Error('Não foi possivel listar os usuarios')
+      })
+  }
+
+  busca (id) {
+    return this._resource.get({ id })
+      .then(res => res.json(), err => {
+        console.log(err)
+        throw new Error('Não foi possivel buscar o usuario')
+      })
+  }
+
+  apaga (id) {
+    return this._resource.delete({ id })
+      .then(null, err => {
+        console.log(err)
+        throw new Error('Não foi possivel excluir o usuario')
+      })
+  }
+
   autentica (login) {
     return this._resource.autentica(login)
-      .then(res => res.json(), err => {
+      .then(res => res, err => {
         console.log(err)
         throw new Error('Não foi possivel autenticar')
       })

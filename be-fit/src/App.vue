@@ -1,8 +1,8 @@
 <template>
   <div>
-    <b-nav class="menu">
+    <b-nav class="menu" v-show="this.$store.state.auth">
       <b-nav-item active><router-link class="nav-link" to="/">Início</router-link></b-nav-item>
-      <b-nav-item><router-link class="nav-link" to="/ClienteLogin">Usuarios</router-link></b-nav-item>
+      <b-nav-item><router-link class="nav-link" to="/LoginHome">Usuarios</router-link></b-nav-item>
       <b-nav-item><router-link class="nav-link" to="/ClienteHome">Clientes</router-link></b-nav-item>
       <b-nav-item><router-link class="nav-link" to="/">Financeiro</router-link></b-nav-item>
       <b-nav-item><v-btn @click="logout">Sair</v-btn></b-nav-item>

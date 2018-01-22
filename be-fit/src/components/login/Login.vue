@@ -4,6 +4,9 @@
         <h2>Perfil de Cliente</h2>
     </div>
     <form  @submit.prevent="gravar()">
+        <b-alert class="alerta" variant="danger" dismissible :show="alert.status" @dismissed="alert=false">
+            {{alert.text}}
+        </b-alert>
         <b-tabs>
             <b-tab title="Login">
                 <div class="row">
@@ -31,8 +34,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <b-button type="submit">Cadastrar</b-button>
-                    <router-link to="/"><b-button>Voltar</b-button></router-link>
+                    <b-button class="botao" type="submit">Cadastrar</b-button>
+                    <router-link class="botao" to="/LoginHome"><b-button>Voltar</b-button></router-link>
                 </div>
             </b-tab>
         </b-tabs>
@@ -46,9 +49,17 @@ import LoginService from './LoginService.js'
 export default {
     created(){
         if(!this.$store.state.auth){
-                this.$router.push({name: 'Home'})
-            }
+            this.$router.push({name: 'Home'})
+        }
         this.service = new LoginService(this.$resource);
+        if(this.id){
+            this.service
+                .busca(this.id)
+                .then(login => {
+                    this.login = login
+                    this.senha = login.senha
+                }, err => console.log(err))
+        }
     },
 
     data () {
@@ -56,25 +67,43 @@ export default {
             senha: '',
             login: new Login(),
             id: this.$route.params.id,
+            alert: {
+                status: false,
+                text: '',
+                type: ''
+            }
         }
     },
 
     methods: {
         gravar () {
-            if(this.senha === this.login.senha){
+            if(this.senha == this.login.senha){
                 this.service
                     .cadastra(this.login)
                     .then(res => {
                         this.login = new Login()
-                        alert("Cadastro efetuado com sucesso")
-                        this.$router.push({name: 'Home'})
+                        this.alert.text = "Cadastro efetuado com sucesso"
+                        this.alert.type = 'info'
+                        this.alert.status = true
+                        this.$router.push({name: 'LoginHome'})
                     }, err => {
-                        alert(err)
+                        this.alert.text = err
+                        this.alert.type = 'warning'
+                        this.alert.status = true
                     })
             } else {
-                alert("As senhas não conhecidem")
+                this.alert.text = "As senhas não conhecidem"
+                this.alert.type = 'warning'
+                this.alert.status = true
+                
             }
         }
     }
 }
 </script>
+
+<style>
+.botao{
+    margin-left: 12px;
+}
+</style>

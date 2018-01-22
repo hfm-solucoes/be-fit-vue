@@ -2,10 +2,11 @@
   <div class="container">
     <div class="header">
         <h2>Perfil de Cliente</h2>
-        <p><router-link class="nav-link" to="/ClienteHome">Voltar</router-link></p>
     </div>
     <form  @submit.prevent="gravar()">
-
+        <b-alert class="alerta" :variant="alert.type" dismissible :show="alert.status" @dismissed="alert=false">
+            {{alert.text}}
+        </b-alert>
         <b-tabs>
             <b-tab title="Funcionais">
                 <div class="row">
@@ -77,6 +78,7 @@
         </b-tabs>
         
         <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <router-link class="botao" to="ClienteHome"><b-button>Voltar</b-button></router-link>
     </form>
   </div>
 </template>
@@ -104,6 +106,11 @@
         data () {
             return{
                 cliente: new Cliente(),
+                alert: {
+                    status: false,
+                    text: '',
+                    type: ''
+                },
                 id: this.$route.params.id
             }
         },
@@ -113,10 +120,16 @@
                 this.service
                     .cadastra(this.cliente)
                     .then(res => {
-                    alert("Cliente cadastrado com sucesso")
+                    this.alert.status = true;
+                    this.alert.text = "Cliente cadastrado com sucesso";
+                    this.alert.type = "info"
                     this.cliente = new Cliente()
                     this.$router.push({name: 'ClienteHome'})
-                    }, err => alert(err))
+                    }, err => {
+                        this.alert.status = true;
+                        this.alert.text = err;
+                        this.alert.type = "warning"
+                    })
             }
         }
 

@@ -1,6 +1,9 @@
 <template>
   <div>
     <div class="form-login" @submit.prevent="autentica()">
+      <b-alert class="alerta" variant="danger" dismissible :show="alert.status" @dismissed="alert=false">
+        {{alert.text}}
+      </b-alert>
       <b-form>
         <b-form-group label="Email:" label-for="email">
           <b-form-input id="email" type="email" v-model="login.email"></b-form-input>
@@ -12,7 +15,6 @@
 
         <b-button type="submit">Entrar</b-button>
         
-        <router-link to="ClienteLogin"><b-button>Cadastrar</b-button></router-link>
       </b-form>
     </div>
   </div>
@@ -29,15 +31,26 @@ export default {
   data () {
     return{
       login: new Login(),
+      alert: {
+        status: false,
+        text: '',
+        type: ''
+      }
     }
   },
 
   methods: {
     autentica () {
       this.service.autentica(this.login).then(res => {
-        this.$store.state.autenticado = res
-        this.$store.state.auth = true
-        this.$router.push({name: 'ClienteHome'})
+        if(res.status == '200'){
+          this.$store.state.autenticado = res
+          this.$store.state.auth = true
+          this.$router.push({name: 'ClienteHome'})
+        } else if(res.status == '203'){
+          this.alert.status = true
+          this.alert.type = 'warning'
+          this.alert.text = res.body
+        }
       })
     }
   }
@@ -52,4 +65,5 @@ export default {
   margin-left: 75vmin;
   margin-top: 25vmin;
 }
+
 </style>
